@@ -9,9 +9,24 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
+    'language' => 'zh-CN',//语言包配置
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        //语言包配置
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //语言包位置 默认就是这个
+                    /*'basePath' => '/messages',*/
+                    'fileMap' => [
+                        'common' => 'common.php',
+                    ],
+                ],
+            ],
+        ],
+
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
