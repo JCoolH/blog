@@ -36,14 +36,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        //开启url优化
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'enablePrettyUrl' => true, //开启功能
+            'showScriptName' => false,//关闭脚本
+            'suffix' => '.jgh',//后缀
             'rules' => [
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
