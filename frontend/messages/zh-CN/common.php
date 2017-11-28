@@ -8,12 +8,13 @@
 
 return [
     'Blog' => '博客',
-    'Home' => '主页',
+    'Home' => '首页',
     'About' => '关于',
     'Login' => '登录',
     'Logout' => '退出',
     'Signup' => '注册',
     'Contact' => '联系',
+    'Articles' => '文章',
     //注册
     'Signup' => '注册',
     'Please fill out the following fields to signup:' => '请填写以下的内容：',
