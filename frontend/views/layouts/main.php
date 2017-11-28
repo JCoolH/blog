@@ -37,7 +37,7 @@ AppAsset::register($this);
     ]);
     $leftMenus = [
         ['label' => Yii::t('common','Home'), 'url' => ['/site/index']],
-        ['label' => Yii::t('common','Articles'), 'url' => ['/post/about']],
+        ['label' => Yii::t('common','Articles'), 'url' => ['/post/index']],
         //['label' => Yii::t('common','Contact'), 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
