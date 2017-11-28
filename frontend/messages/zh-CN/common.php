@@ -14,5 +14,21 @@ return [
     'Logout' => '退出',
     'Signup' => '注册',
     'Contact' => '联系',
+    //注册
+    'Signup' => '注册',
+    'Please fill out the following fields to signup:' => '请填写以下的内容：',
+    'Username' => '用户名',
+    'Email' => '邮箱',
+    'Password' => '密码',
+    'This username has already been taken.' => '该用户名已经存在。',
+    'This email address has already been taken.' => '该邮箱已经被使用',
+    //登录
+    'Please fill out the following fields to login:' => '请输入登录信息：',
+    'Incorrect username or password.' => '用户名或者密码错误',
+    'If you forgot your password you can' => '如果你忘记了密码，你可以',
+    'reset it' => '重置密码',
+    'RememberMe' => '记住密码'
+
+
 
 ];
