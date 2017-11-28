@@ -13,6 +13,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $rePassword;
+    public $verifyCode;
 
     /**
      * @return array //语言包
@@ -23,6 +25,8 @@ class SignupForm extends Model
             'username' => Yii::t('common','Username'),
             'email' => Yii::t('common','Email'),
             'password' => Yii::t('common','Password'),
+            'rePassword' => Yii::t('common','rePassword'),
+            'verifyCode' => Yii::t('common','verifyCode'),
 
         ];
     }
@@ -35,7 +39,8 @@ class SignupForm extends Model
             ['username', 'trim'],
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\UserModel', 'message' => Yii::t('common','This username has already been taken.')],
-            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['username', 'string', 'min' => 2, 'max' => 16],
+            ['username', 'match','pattern' => '/^[(\x{4E00}-\x{9FA5})a-zA-Z]+[(\x{4E00}-\x{9FA5})a-zA-Z_\d]*$/u','message'=>'用户名由字母，汉字，数字，下划线组成，且不能以数字和下划线开头。'],
 
             ['email', 'trim'],
             ['email', 'required'],
@@ -43,8 +48,11 @@ class SignupForm extends Model
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\UserModel', 'message' => Yii::t('common','This email address has already been taken.')],
 
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            [['password','rePassword'], 'required'],
+            [['password','rePassword'], 'string', 'min' => 6],
+            ['rePassword', 'compare', 'compareAttribute' => 'password','message' => Yii::t('common','The two passwords are different!')],
+
+            ['verifyCode', 'captcha'],
         ];
     }
 

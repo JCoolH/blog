@@ -16,13 +16,16 @@ return [
     'Contact' => '联系',
     'Articles' => '文章',
     //注册
-    'Signup' => '注册',
-    'Please fill out the following fields to signup:' => '请填写以下的内容：',
+
+    'Please fill out the following fields to signup:' => '请填写以下内容进行注册：',
     'Username' => '用户名',
     'Email' => '邮箱',
     'Password' => '密码',
+    'rePassword' => '重复密码',
+    'verifyCode' => '验证码',
     'This username has already been taken.' => '该用户名已经存在。',
     'This email address has already been taken.' => '该邮箱已经被使用',
+    'The two passwords are different!' => '两次输入的密码不一致！',
     //登录
     'Please fill out the following fields to login:' => '请输入登录信息：',
     'Incorrect username or password.' => '用户名或者密码错误',
