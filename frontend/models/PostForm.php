@@ -51,8 +51,9 @@ class PostForm extends Model
             'id' => Yii::t('common','ID'),
             'title' => Yii::t('common','Title'),
             'content' => Yii::t('common','Content'),
-            'label_img' => Yii::t('common','Label_img'),
+            'label_img' => Yii::t('common','LabelImg'),
             'tags' => Yii::t('common','Tags'),
+            'cat_id' => Yii::t('common','Cat'),
         ];
     }
 

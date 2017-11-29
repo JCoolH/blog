@@ -2,11 +2,12 @@
 
 namespace common\models;
 
+use common\models\base\BaseModel;
 use Yii;
 
 /**
  * This is the model class for table "posts".
- *
+ *  文章模型
  * @property integer $id
  * @property string $title
  * @property string $summary
@@ -19,7 +20,7 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class PostsModel extends \yii\db\ActiveRecord
+class PostsModel extends BaseModel
 {
     /**
      * @inheritdoc

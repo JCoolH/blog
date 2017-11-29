@@ -36,8 +36,10 @@ return [
     'Id' => '编码',
     'Title' => '标题',
     'Content' => '内容',
-    'Label_img' => '标签图',
+    'LabelImg' => '标签图',
     'Tags' => '标签',
+    'Cat' => '分类',
+    'Publish' => '发布',
 
 
 

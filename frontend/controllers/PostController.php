@@ -10,6 +10,8 @@ namespace frontend\controllers;
 
 
 use frontend\controllers\base\BaseController;
+use frontend\models\PostForm;
+use common\models\CatModel;
 
 /**
  * Class PostController
@@ -25,5 +27,15 @@ class PostController extends BaseController
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionCreate()
+    {
+        $model = new PostForm();
+        //获得分类
+//        $a = new CatModel();
+//        $aa = $a->getAllCats();
+        $cat = CatModel::getAllCats();
+        return $this->render('create', ['model' => $model, 'cat' => $cat]);
     }
 }
