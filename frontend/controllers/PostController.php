@@ -21,6 +21,21 @@ use common\models\CatModel;
 class PostController extends BaseController
 {
     /**
+     * 引用图片上传组件
+     * @return array
+     */
+    public function actions()
+    {
+        return [
+            'upload'=>[
+                'class' => 'common\widgets\file_upload\UploadAction',     //这里扩展地址别写错
+                'config' => [
+                    'imagePathFormat' => "/image/{yyyy}{mm}{dd}/{time}{rand:6}",
+                ]
+            ]
+        ];
+    }
+    /**
      * 文章列表
      * @return string
      */
@@ -29,6 +44,10 @@ class PostController extends BaseController
         return $this->render('index');
     }
 
+    /**
+     * 添加文章页面
+     * @return string
+     */
     public function actionCreate()
     {
         $model = new PostForm();

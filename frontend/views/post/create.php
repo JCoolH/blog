@@ -8,11 +8,9 @@
 use yii\bootstrap\activeForm;
 use yii\bootstrap\html;
 
-
 $this->title = '创建';
 $this->params['breadcrumbs'][] = ['label' => '文章', 'url' => ['/post/index']];
 $this->params['breadcrumbs'][] = $this->title;
-//var_dump($cat);exit;
 ?>
 <div class="row">
     <div class="col-lg-9">
@@ -26,7 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?=$form->field($model,'cat_id')->dropDownList($cat)?>
 
-            <?=$form->field($model,'label_img')->textInput(['maxlenghth' => true])?>
+            <?= $form->field($model, 'label_img')->widget('common\widgets\file_upload\FileUpload',[
+                'config'=>[
+                    //图片上传的一些配置，不写调用默认配置
+                    'domain_url' => 'http://web.blog.com',
+                ]
+            ]) ?>
+
 
             <?=$form->field($model,'content')->textInput(['maxlenghth' => true])?>
 
