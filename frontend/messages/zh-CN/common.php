@@ -31,7 +31,13 @@ return [
     'Incorrect username or password.' => '用户名或者密码错误',
     'If you forgot your password you can' => '如果你忘记了密码，你可以',
     'reset it' => '重置密码',
-    'RememberMe' => '记住密码'
+    'RememberMe' => '记住密码',
+    //文章表单
+    'Id' => '编码',
+    'Title' => '标题',
+    'Content' => '内容',
+    'Label_img' => '标签图',
+    'Tags' => '标签',
 
 
 
