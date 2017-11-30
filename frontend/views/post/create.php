@@ -24,17 +24,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?=$form->field($model,'cat_id')->dropDownList($cat)?>
 
-            <?= $form->field($model, 'label_img')->widget('common\widgets\file_upload\FileUpload',[
+            <?= $form->field($model, 'label_img')->widget('common\widgets\file_upload\FileUpload', [
                 'config'=>[
                     //图片上传的一些配置，不写调用默认配置
-                    'domain_url' => 'http://web.blog.com',
+                    //'domain_url' => 'http://web.blog.com',
                 ]
             ]) ?>
 
 
-            <?=$form->field($model,'content')->textInput(['maxlenghth' => true])?>
+            <?=$form->field($model,'content')->widget('common\widgets\ueditor\UEditor', [
+                'clientOptions' => [
+                    'initialFrameHeight' => '400',
+                ],
 
-            <?=$form->field($model,'tags')->textInput(['maxlenghth' => true])?>
+            ])?>
+
+            <?=$form->field($model,'tags')->widget('common\widgets\tags\TagWidget')?>
 
            <div class="form-group">
                 <?=Html::submitButton(Yii::t('common','Publish'), ['class'=>'btn btn-success'])?>

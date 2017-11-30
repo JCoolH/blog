@@ -22,6 +22,8 @@ use Yii;
  */
 class PostsModel extends BaseModel
 {
+    const IS_VALID = 1; //已经发布
+    const NO_VALID = 0; //未发布
     /**
      * @inheritdoc
      */
