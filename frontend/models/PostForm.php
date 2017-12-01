@@ -9,8 +9,10 @@
 namespace frontend\models;
 
 use common\models\PostsModel;
+use common\models\RelationPostTagsModel;
 use Yii;
 use yii\base\Model;
+use yii\db\Query;
 
 /**
  * Class PostForm
@@ -36,6 +38,13 @@ class PostForm extends Model
     const SCENARIOS_CREATE = 'create';
     const SCENARIOS_UPDATE = 'update';
 
+    /**
+     * 定义事件
+     * EVENT_AFTER_CREATE 创建之后的事件
+     * EVENT_AFTER_UPDATE 更新之后的事件
+     */
+    const EVENT_AFTER_CREATE = 'create';
+    const EVENT_AFTER_UPDATE = 'update';
     /**
      * 场景设置
      * @return array
@@ -85,7 +94,7 @@ class PostForm extends Model
      */
     public function create()
     {
-        //食物
+        //事务
         $transaction = Yii::$app->db->beginTransaction();
         try{
             $model = new PostsModel();
@@ -100,11 +109,9 @@ class PostForm extends Model
                 throw new \Exception('文章保存失败');
 
             $this->id = $model->id;
-
             //调用事件
-            $this->_eventAfterCreate();
-
-
+            $data = array_merge($this->getAttributes(),$model->getAttributes());
+            $this->_eventAfterCreate($data);
             $transaction->commit();
             return true;
         }catch (\Exception $e){
@@ -129,8 +136,42 @@ class PostForm extends Model
 
     }
 
-    private function _eventAfterCreate()
+    /**
+     * 文章创建后的事件
+     * @param $data
+     */
+    private function _eventAfterCreate($data)
     {
+        //var_dump($data);exit;
+        //添加事件
+        $this->on(self::EVENT_AFTER_CREATE,[$this,'_eventAddTags'],$data);
+        //触发事件
+        $this->trigger(self::EVENT_AFTER_CREATE);
 
+    }
+
+    /**
+     * 添加标签
+     */
+    public function _eventAddTags($event)
+    {
+        //保存标签
+        $tag = new TagForm();
+        $tag->tags = $event->data['tags'];
+        //var_dump($tag->tags);exit;
+        $tagIds = $tag->saveTag();
+        //删除原先文章与标签的关联关系
+        RelationPostTagsModel::deleteAll(['post_id'=>$event->data['id']]);
+        //批量保存文章与标签的关联关系
+        if (!empty($tagIds)){
+            $row = [];
+            foreach($tagIds as $k => $v){
+                $row[$k]['post_id'] = $this->id;
+                $row[$k]['tag_id'] = $v;
+            }
+            $res = (new Query())->createCommand()->batchInsert(RelationPostTagsModel::tableName(), ['post_id', 'tag_id'], $row)->execute();
+            if (!$res)
+                throw new \Exception("关联关系保存失败");
+        }
     }
 }

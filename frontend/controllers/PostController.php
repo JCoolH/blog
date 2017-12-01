@@ -12,7 +12,10 @@ namespace frontend\controllers;
 use frontend\controllers\base\BaseController;
 use frontend\models\PostForm;
 use common\models\CatModel;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use Yii;
+
 /**
  * Class PostController
  * 文章控制器
@@ -20,6 +23,37 @@ use Yii;
  */
 class PostController extends BaseController
 {
+    /**
+     * 过滤方法  == 权限
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'uploads', 'upload'],
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['create', 'uploads', 'upload'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    '*' => ['post', 'get'],
+                ],
+            ],
+        ];
+    }
     /**
      * 引用图片上传组件
      * @return array
